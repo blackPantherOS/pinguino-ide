@@ -1,12 +1,20 @@
 Pinguino IDE 13
 ===============
 
+### Install from blackPanther OS repo ###
+```shell
+installing pinguino-ide
+```
+and start from main menu
+
+OR 
+
 ### Install from source code ###
 ```shell
 mkdir -p ~/Pinguino/v13
 cd ~/Pinguino/v13
-git clone https://github.com/PinguinoIDE/pinguino-ide.git pinguino-ide
-git clone https://github.com/PinguinoIDE/pinguino-libraries.git pinguino-libraries 
+git clone https://github.com/blackPantherOS/pinguino-ide.git pinguino-ide
+git clone https://github.com/blackPantherOS/pinguino-libraries.git pinguino-libraries 
 ```
 
 ### Launch ###
