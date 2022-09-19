@@ -56,7 +56,13 @@ class PinguinoAutoCompleter(QListWidget):
                          "arch32" : [],
                          }
 
-        with open(os.path.join(os.getenv("PINGUINO_USER_PATH"), "reserved.pickle"), "rb") as file_reserved:
+        try:
+            open(os.path.join(os.getenv("PINGUINO_USER_PATH"), "reserved.pickle"), "rb")
+            reserved_file = "reserved.pickle"
+        except:
+    	    reserved_file = os.path.join(os.getcwd(),"reserved.pickle")
+
+        with open(os.path.join(os.getenv("PINGUINO_USER_PATH"), reserved_file), "rb") as file_reserved:
             self.namespaces = pickle.load(file_reserved)
 
         self.icons = CompleteIcons()
@@ -136,7 +142,7 @@ class PinguinoAutoCompleter(QListWidget):
 
     #----------------------------------------------------------------------
     def ajustPos(self):
-        screen = QtGui.QDesktopWidget().screenGeometry()
+        screen = QtWidgets.QDesktopWidget().screenGeometry()
         size = self.geometry()
 
         cont = 0
@@ -169,10 +175,10 @@ class PinguinoAutoCompleter(QListWidget):
     #----------------------------------------------------------------------
     def addNewItem(self, name, icon=None):
 
-        if os.getenv("PINGUINO_PYTHON") is "2":
+        if os.getenv("PINGUINO_PYTHON") == "2":
             if not icon: icon = None
             elif type(icon) in [str, unicode]: icon = getattr(self.icons, icon)
-        elif os.getenv("PINGUINO_PYTHON") is "3":
+        elif os.getenv("PINGUINO_PYTHON") == "3":
             if not icon: icon = None
             elif type(icon) == str: icon = getattr(self.icons, icon)
 
@@ -232,10 +238,10 @@ class PinguinoAutoCompleter(QListWidget):
     #----------------------------------------------------------------------
     def addItemsCompleter(self, list_, icon=None):
 
-        if os.getenv("PINGUINO_PYTHON") is "2":
+        if os.getenv("PINGUINO_PYTHON") == "2":
             if not icon: icon = None
             elif type(icon) in [str, unicode]: icon = getattr(self.icons, icon)
-        elif os.getenv("PINGUINO_PYTHON") is "3":
+        elif os.getenv("PINGUINO_PYTHON") == "3":
             if not icon: icon = None
             elif type(icon) == str: icon = getattr(self.icons, icon)
 

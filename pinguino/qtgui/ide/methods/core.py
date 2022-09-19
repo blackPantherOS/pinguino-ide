@@ -1175,7 +1175,7 @@ class PinguinoCore(PinguinoComponents, PinguinoChilds, PinguinoQueries, Pinguino
             editor.text_edit.setDocument(text_doc)
             editor.text_edit.setTextCursor(text_cur)
 
-        selection = QtGui.QTextEdit.ExtraSelection()
+        selection = QtWidgets.QTextEdit.ExtraSelection()
         selection.format.setBackground(QtGui.QColor(color))
         selection.format.setProperty(QtGui.QTextFormat.FullWidthSelection, True)
         selection.cursor = editor.text_edit.textCursor()
@@ -1445,16 +1445,14 @@ class PinguinoCore(PinguinoComponents, PinguinoChilds, PinguinoQueries, Pinguino
 
         reserved_filename = os.path.join(os.getenv("PINGUINO_USER_PATH"), "reserved.pickle")
 
-        name_spaces_commun = set(name_spaces_8).intersection(name_spaces_32)
-        name_spaces_8 = set(name_spaces_8).difference(name_spaces_commun)
-        name_spaces_32 = set(name_spaces_32).difference(name_spaces_commun)
+        name_spaces_commun = []
 
-        # copy_32 = name_spaces_32[:]
-        # for name in name_spaces_8:
-            # if name in copy_32:
-                # name_spaces_8.remove(name)
-                # name_spaces_32.remove(name)
-                # name_spaces_commun.append(name)
+        copy_32 = name_spaces_32[:]
+        for name in name_spaces_8:
+            if name in copy_32:
+                name_spaces_8.remove(name)
+                name_spaces_32.remove(name)
+                name_spaces_commun.append(name)
 
         namespaces = {"arch8": name_spaces_8,
                       "arch32": name_spaces_32,
@@ -1565,7 +1563,7 @@ class PinguinoCore(PinguinoComponents, PinguinoChilds, PinguinoQueries, Pinguino
     def ide_reset_instalation(self):
         """"""
         path = os.getenv("PINGUINO_USER_PATH")
-        if Dialogs.confirm_message(self, "This function remove some files from {} and restart the IDE.\nthis could fix some bugs".format(path)):
+        if Dialogs.confirm_message(self, "This function removes some files from {} and restart the IDE.\nthis could fix some bugs".format(path)):
 
             from pinguino import pinguino_reset
             self.ide_restart_now()

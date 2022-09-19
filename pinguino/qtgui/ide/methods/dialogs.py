@@ -294,7 +294,7 @@ class Dialogs(object):
     @classmethod
     def get_text(self, parent, name, default=""):
 
-        text, ok = QtGui.QInputDialog.getText(parent,
+        text, ok = QtWidgets.QInputDialog.getText(parent,
                 os.getenv("PINGUINO_NAME")+QtWidgets.QApplication.translate("Dialogs", " - Input text"),
                 name+":", QtWidgets.QLineEdit.Normal,
                 default)
